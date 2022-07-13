@@ -5,13 +5,33 @@
     <title>상품 테스트</title>
 </head>
 <body>
+
     <h1>상품 목록 조회</h1>
     <table border="1">
         <th>상품 번호</th>
         <th>상품 이름</th>
         <th>상품 가격</th>
-        <th>등록 날짜</th>
-        <th>수정 날짜</th>
+        <th>세부 정보</th>
+        <tr th:each="product : ${productList}">
+            <td th:text="${product.productNo}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.salePrice}"></td>
+            <td><a th:href="@{'product/'+${product.productNo}}">세부정보보기</a></td>
+        </tr>
     </table>
+    <h2>상품 추가</h2>
+    <form th:action="@{/product}" th:method="post" th:object="${product}">
+        <table border="1">
+            <th>상품 번호</th>
+            <th>상품 이름</th>
+            <th>상품 가격</th>
+            <tr>
+                <td><input type="text" class="form-control" th:field="*{productNo}"></td>
+                <td><input type="text" class="form-control" th:field="*{productName}"></td>
+                <td><input type="text" class="form-control" th:field="*{salePrice}"></td>
+            </tr>
+        </table>
+        <button type="submit">상품 추가</button>
+    </form>
 </body>
 </html>

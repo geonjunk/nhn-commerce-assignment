@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<a th:href="@{/product}">뒤로가기</a>
+<h1>상품 세부 조회</h1>
+<form th:action="@{/product/update}" th:method="post" >
+<table border="1">
+  <th>상품 번호</th>
+  <th>상품 이름</th>
+  <th>상품 가격</th>
+  <th>등록 날짜</th>
+  <th>수정 날짜</th>
+  <tr>
+    <td><input type="text" class="form-control" th:field="${productDetail.productNo}" readonly></td>
+    <td><input type="text" class="form-control"  th:field="${productDetail.productName}"></td>
+    <td><input type="number" class="form-control" th:field="${productDetail.salePrice}"></td>
+    <td th:text="${productDetail.registerYmdt}"></td>
+    <td th:text="${productDetail.updateYmdt}"></td>
+    </td>
+  </tr>
+</table>
+</form>
+
+<button type="button" class="modifyBtn">상품 수정</button>
+<button type="button" class="removeBtn">상품 삭제</button>
+<script th:inline="javascript">
+  let actionForm=document.querySelector("form")
+  document.querySelector(".removeBtn").addEventListener('click',function(event){
+    console.log("클릭")
+    actionForm.setAttribute("action","/product/delete");
+    actionForm.setAttribute("method","post");
+
+    actionForm.submit();
+  });
+
+  document.querySelector(".modifyBtn").addEventListener('click',function (event){
+    console.log("클릭2")
+    actionForm.setAttribute("action","/product/update");
+    actionForm.setAttribute("method","post");
+    actionForm.submit();
+  });
+</script>
+</body>
+</html>
