@@ -11,8 +11,8 @@ class ProductService(
 ) {
     fun findProductList(): List<Product> = productRepository.findProductList()
     fun findProductDetail(productNo:Int): Product = productRepository.findProductDetail(productNo)
-    fun addProduct(product: Product):List<Product> = productRepository.addProduct(product.productNo,product.productName,product.salePrice,LocalDateTime.now())
-    fun updateProduct(productNo: Int,productName:String,salePrice:Int):List<Product> = productRepository.updateProduct(productNo,productName,salePrice,LocalDateTime.now())
+    fun addProduct(productNo: Int,productName:String,salePrice:Int)= productRepository.addProduct(productNo,productName,salePrice)
+    fun updateProduct(productNo: Int,productName:String,salePrice:Int) = productRepository.updateProduct(productNo,productName,salePrice)
 
-    fun deleteProduct(productNo: Int):List<Product> = productRepository.deleteProduct(productNo)
+    fun deleteProduct(productNo: Int) = productRepository.deleteProduct(productNo)
 }
