@@ -52,6 +52,7 @@ class ProductController(
         productService.updateProduct(product.productNo,product.productName,product.salePrice)
         return "redirect:/product"
     }
+    
     fun Int.isPositive(): Boolean = this > 0
     // TODO (상품 삭제 기능 + Exception 처리)
     @PostMapping("/product/delete")
