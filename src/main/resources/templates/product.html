@@ -20,15 +20,15 @@
         </tr>
     </table>
     <h2>상품 추가</h2>
-    <form th:action="@{/product}" th:method="post" th:object="${product}">
+    <form th:action="@{/product}" th:method="post">
         <table border="1">
             <th>상품 번호</th>
             <th>상품 이름</th>
             <th>상품 가격</th>
             <tr>
-                <td><input type="text" class="form-control" th:field="*{productNo}"></td>
-                <td><input type="text" class="form-control" th:field="*{productName}"></td>
-                <td><input type="text" class="form-control" th:field="*{salePrice}"></td>
+                <td><input type="number" class="form-control" value="0" name="productNo"></td>
+                <td><input type="text" class="form-control" name="productName"></td>
+                <td><input type="number" class="form-control" value="0" name="salePrice"></td>
             </tr>
         </table>
         <button type="submit">상품 추가</button>

@@ -14,7 +14,6 @@ class ProductController(
     @GetMapping("/product")
     fun getProductList(model: Model): String {
         model.addAttribute("productList", productService.findProductList())
-        model.addAttribute("product",Product(0,"", null,0,null))
         return "product"
     }
 
@@ -28,11 +27,22 @@ class ProductController(
 
     // TODO (상품 추가 기능) 완료
     @PostMapping("/product")
-    @ResponseStatus(HttpStatus.CREATED)
     fun addProduct(
-        product:Product,model: Model):String{
-        productService.addProduct(product)
-        return getProductList(model)
+        productNo: Int,productName:String,salePrice:Int):String{
+        try{
+            salePrice.also{
+                if(it.isPositive()){
+                    productService.addProduct(productNo,productName,salePrice)
+                }else{
+                    println("추가 불가능 : 판매금액이 음수입니다.")
+                    throw Error("판매 금액 음수 에러")
+                }
+            }
+        }catch(e:Error){
+            println(e)
+        }finally {
+            return "redirect:/product"
+        }
     }
 
 
@@ -42,7 +52,7 @@ class ProductController(
         productService.updateProduct(product.productNo,product.productName,product.salePrice)
         return "redirect:/product"
     }
-
+    fun Int.isPositive(): Boolean = this > 0
     // TODO (상품 삭제 기능 + Exception 처리)
     @PostMapping("/product/delete")
     fun deleteProduct(product: Product,model: Model):String{

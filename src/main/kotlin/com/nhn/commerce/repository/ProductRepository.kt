@@ -14,11 +14,11 @@ interface ProductRepository {
 
 
     @Select("INSERT INTO product (product_no,product_name,sale_price,register_ymdt,update_ymdt) VALUES(#{productNo},#{productName},#{salePrice},#{localDateTime},#{localDateTime})")
-    fun addProduct(productNo:Int,productName:String,salePrice: Int,localDateTime: LocalDateTime): List<Product>
+    fun addProduct(productNo:Int,productName:String,salePrice: Int,localDateTime: LocalDateTime= LocalDateTime.now())
 
     @Select("Update product SET sale_price=#{salePrice} , product_name=#{productName},update_ymdt=#{localDateTime} where product_no=#{productNo}")
-    fun updateProduct(productNo:Int,productName: String,salePrice:Int,localDateTime: LocalDateTime): List<Product>
+    fun updateProduct(productNo:Int,productName: String,salePrice:Int,localDateTime: LocalDateTime= LocalDateTime.now())
 
     @Select("Delete from product where product_no=#{productNo}")
-    fun deleteProduct(productNo: Int):List<Product>
+    fun deleteProduct(productNo: Int)
 }
