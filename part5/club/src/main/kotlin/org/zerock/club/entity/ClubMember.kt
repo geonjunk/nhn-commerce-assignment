@@ -8,13 +8,14 @@ import javax.persistence.Id
 
 @Entity
 data class ClubMember(@Id
-                      private var email:String,
-                      private var password:String,
-                      private var name :String,private var fromSocial:Boolean,
+                     var email:String="",
+                     var password:String="",
+                     var name :String="",var fromSocial:Boolean?=null,
                      @ElementCollection(fetch = FetchType.LAZY)
                      val roleSet:MutableSet<ClubMemberRole> = HashSet()):BaseEntity() {
 
-                         fun addMemberRole(clubMemberRole:ClubMemberRole){
+
+    fun addMemberRole(clubMemberRole:ClubMemberRole){
                              roleSet.add(clubMemberRole)
                          }
 

@@ -35,6 +35,7 @@ dependencies {
 	implementation ("mysql:mysql-connector-java")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-java8time")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 }
 
 tasks.withType<KotlinCompile> {
