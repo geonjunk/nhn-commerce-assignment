@@ -1,14 +1,14 @@
-package org.zerock.club.service
+package org.zerock.club.security.service
 
 import org.springframework.stereotype.Service
-import org.zerock.club.dto.NoteDTO
+import org.zerock.club.security.dto.NoteDTO
 import org.zerock.club.entity.Note
 import org.zerock.club.repository.NoteRepository
 import java.util.Optional
 import java.util.stream.Collectors
 
 @Service
-class NoteServiceImpl(private val noteRepository: NoteRepository):NoteService{
+class NoteServiceImpl(private val noteRepository: NoteRepository): NoteService {
 
     override fun register(noteDTO: NoteDTO): Long {
         val note = dtoToEntity(noteDTO)

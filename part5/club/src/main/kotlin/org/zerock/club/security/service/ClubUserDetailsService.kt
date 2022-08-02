@@ -1,4 +1,4 @@
-package org.zerock.club.service
+package org.zerock.club.security.service
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

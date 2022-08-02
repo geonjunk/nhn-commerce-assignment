@@ -1,4 +1,4 @@
-package org.zerock.club.dto
+package org.zerock.club.security.dto
 
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime

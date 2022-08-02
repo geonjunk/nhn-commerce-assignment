@@ -3,6 +3,7 @@ package org.zerock.club.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.Customizer
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer.AuthorizationManagerRequestMatcherRegistry
 import org.springframework.security.core.userdetails.User
@@ -13,10 +14,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.zerock.club.security.ApiCheckFilter
+import org.zerock.club.security.handler.ClubLoginSuccessHandler
+import org.zerock.club.security.service.ClubUserDetailsService
 
 
 @Configuration
-class SecurityConfig {
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+class SecurityConfig(val userDetailsService: ClubUserDetailsService) {
 
     @Bean
     fun passwordEncoder():PasswordEncoder{
@@ -40,14 +44,19 @@ class SecurityConfig {
             .antMatchers("/sample/member").hasRole("USER")
         http.formLogin()
         http.csrf().disable()
+        //
         http.logout()
-
-        http.addFilterBefore(apiCheckFilter(),
-            UsernamePasswordAuthenticationFilter::class.java)
+        http.oauth2Login().successHandler(successHandler())
+        http.rememberMe().tokenValiditySeconds(60*60*24*7).userDetailsService(userDetailsService)
+//        http.addFilterBefore(apiCheckFilter(),
+//            UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
-
+    @Bean
+    fun successHandler(): ClubLoginSuccessHandler {//config 수정
+        return ClubLoginSuccessHandler(passwordEncoder = passwordEncoder())
+    }
     @Bean
     fun apiCheckFilter():ApiCheckFilter{
         return ApiCheckFilter(pattern = "/notes/**/*")

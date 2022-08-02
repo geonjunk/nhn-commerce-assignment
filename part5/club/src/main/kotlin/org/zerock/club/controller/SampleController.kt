@@ -1,6 +1,7 @@
 package org.zerock.club.controller
 
 import org.slf4j.LoggerFactory
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,6 +13,7 @@ import org.zerock.club.dto.ClubAuthMemberDTO
 class SampleController {
     private val log = LoggerFactory.getLogger(javaClass)
     @GetMapping("/all")
+    @PreAuthorize("permitAll()")
     fun exAll(){
         log.info("exAll...")
     }
@@ -24,6 +26,7 @@ class SampleController {
         log.info(clubAuthMember.toString())
     }
     @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
     fun exAdmin(){
         log.info("exAdmin...")
     }
