@@ -2,10 +2,10 @@ package com.nhn.commerce.controller
 
 import com.nhn.commerce.model.Product
 import com.nhn.commerce.service.ProductService
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+
 
 @Controller
 class ProductController(
@@ -13,6 +13,7 @@ class ProductController(
 ) {
     @GetMapping("/product")
     fun getProductList(model: Model): String {
+      //  log.error("LogNCrash Error Test")
         model.addAttribute("productList", productService.findProductList())
         return "product"
     }
@@ -52,7 +53,7 @@ class ProductController(
         productService.updateProduct(product.productNo,product.productName,product.salePrice)
         return "redirect:/product"
     }
-    
+
     fun Int.isPositive(): Boolean = this > 0
     // TODO (상품 삭제 기능 + Exception 처리)
     @PostMapping("/product/delete")

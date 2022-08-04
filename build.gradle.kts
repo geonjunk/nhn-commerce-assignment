@@ -26,6 +26,11 @@ dependencies {
 	runtimeOnly("mysql:mysql-connector-java")
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	implementation("org.json:json:20171018")
+	implementation("org.apache.httpcomponents:httpclient:4.5")
+	implementation("ch.qos.logback:logback-classic:1.2.3")
+	implementation(files("lib/toast-logncrash-logback-sdk-3.0.5.jar"))
 }
 
 tasks.withType<KotlinCompile> {

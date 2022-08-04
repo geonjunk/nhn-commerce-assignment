@@ -7,5 +7,9 @@ data class Product(
     val productName: String,
     val registerYmdt: LocalDateTime?,
     val salePrice: Int,
-    var updateYmdt: LocalDateTime?,
-)
+    var updateYmdt: LocalDateTime?
+){
+   
+}
+
+
